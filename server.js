@@ -16,7 +16,7 @@ app.use(express.json());
 
 // --- CONEXIÓN A BASE DE DATOS ---
 // Si usas MongoDB Atlas, cambia la URL
-mongoose.connect("mongodb+srv://lyepesm_db_user:prueba123@apiover.ytbp1uo.mongodb.net/?appName=apiOver")
+mongoose.connect("mongodb+srv://lyepesm_db_user:prueba123@apiover.ytbp1uo.mongodb.net/apiOver?retryWrites=true&w=majority")
     .then(() => console.log('✅ Conectado a MongoDB'))
     .catch(err => console.error('❌ Error de conexión:', err));
 
