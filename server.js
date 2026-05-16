@@ -161,15 +161,10 @@ app.post('/api/login', async (req, res) => {
     }
 });
 
-// --- INICIAR SERVIDOR ---
-// Cambia esto
-/*const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 3001;
+
 app.listen(PORT, '0.0.0.0', () => {
-    console.log(`🚀 Servidor corriendo en: http://localhost:${PORT}`);
+    console.log(`🚀 Servidor corriendo en puerto ${PORT}`);
 }).on('error', (err) => {
-    if (err.code === 'EADDRINUSE') {
-        console.error(`❌ Error: El puerto ${PORT} ya está en uso. Cierra el proceso anterior antes de reiniciar.`);
-    } else {
-        console.error(err);
-    }
-});*/
+    console.error(err);
+});
