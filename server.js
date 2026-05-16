@@ -16,7 +16,7 @@ app.use(express.json());
 
 // --- CONEXIÓN A BASE DE DATOS ---
 // Si usas MongoDB Atlas, cambia la URL
-mongoose.connect(process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/app_registros_db')
+mongoose.connect("mongodb+srv://lyepesm_db_user:prueba123@apiover.ytbp1uo.mongodb.net/?appName=apiOver")
     .then(() => console.log('✅ Conectado a MongoDB'))
     .catch(err => console.error('❌ Error de conexión:', err));
 
@@ -163,7 +163,7 @@ app.post('/api/login', async (req, res) => {
 
 // --- INICIAR SERVIDOR ---
 // Cambia esto
-const PORT = process.env.PORT || 3001;
+/*const PORT = process.env.PORT || 3001;
 app.listen(PORT, '0.0.0.0', () => {
     console.log(`🚀 Servidor corriendo en: http://localhost:${PORT}`);
 }).on('error', (err) => {
@@ -172,4 +172,4 @@ app.listen(PORT, '0.0.0.0', () => {
     } else {
         console.error(err);
     }
-});
+});*/
