@@ -28,17 +28,17 @@ mongoose
 // ─── Modelos ──────────────────────────────────────────────────────────────────
 
 const TaskSchema = new mongoose.Schema({
-    username:    { type: String, required: true, index: true },
-    title:       { type: String, required: true },
+    username: { type: String, required: true, index: true },
+    title: { type: String, required: true },
     description: { type: String, default: '' },
-    category:    { type: String, default: 'Normal' },
+    category: { type: String, default: 'Normal' },
     isCompleted: { type: Boolean, default: false },
-    createdAt:   { type: Date, default: Date.now },
+    createdAt: { type: Date, default: Date.now },
 });
 
 const UserPrefsSchema = new mongoose.Schema({
-    username:     { type: String, required: true, unique: true },
-    isDarkMode:   { type: Boolean, default: false },
+    username: { type: String, required: true, unique: true },
+    isDarkMode: { type: Boolean, default: false },
     primaryColor: { type: Number, default: 0xFF6750A4 },
 });
 
@@ -47,9 +47,9 @@ const UserSchema = new mongoose.Schema({
     password: { type: String, required: true },
 });
 
-const Task      = mongoose.model('Task', TaskSchema);
+const Task = mongoose.model('Task', TaskSchema);
 const UserPrefs = mongoose.model('UserPrefs', UserPrefsSchema);
-const User      = mongoose.model('User', UserSchema);
+const User = mongoose.model('User', UserSchema);
 
 // ─── Autenticación ────────────────────────────────────────────────────────────
 
@@ -96,9 +96,15 @@ app.post('/api/login', async (req, res) => {
 app.get('/api/tasks/:username', async (req, res) => {
     try {
         const tasks = await Task.find({ username: req.params.username }).sort({ createdAt: -1 });
-        res.json(tasks);
+        const data = await res.json(tasks);
+
+        if (data.length === 0) {
+
+            res.status(404).json({ message: `El usuario no tiene tareas asignadas` });
+        }
     } catch {
-        res.status(500).json({ error: 'Error al obtener tareas' });
+        res.
+            res.status(500).json({ error: 'Error al obtener tareas' });
     }
 });
 
@@ -191,4 +197,4 @@ const shutdown = async (signal) => {
 };
 
 process.on('SIGTERM', () => shutdown('SIGTERM'));
-process.on('SIGINT',  () => shutdown('SIGINT'));
+process.on('SIGINT', () => shutdown('SIGINT'));
