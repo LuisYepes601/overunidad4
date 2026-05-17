@@ -96,15 +96,14 @@ app.post('/api/login', async (req, res) => {
 app.get('/api/tasks/:username', async (req, res) => {
     try {
         const tasks = await Task.find({ username: req.params.username }).sort({ createdAt: -1 });
-        const data = await res.json(tasks);
 
-        if (data.length === 0) {
-
-            res.status(404).json({ message: `El usuario no tiene tareas asignadas` });
+        if (tasks.length === 0) {
+            return res.status(404).json({ message: 'El usuario no tiene tareas asignadas' });
         }
+
+        res.json(tasks);
     } catch {
-        res.
-            res.status(500).json({ error: 'Error al obtener tareas' });
+        res.status(500).json({ error: 'Error al obtener tareas' });
     }
 });
 
